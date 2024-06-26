@@ -2,7 +2,13 @@
 
 > UIRP Hackathon 2024
 
-## Running
+## Getting started
+
+### Prerequisites
+
+0. Install [Docker](https://docs.docker.com/engine/install/)
+
+### Running
 
 Start the server by running the following:
 
