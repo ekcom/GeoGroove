@@ -1,4 +1,4 @@
-# COUNTRYMen
+# COUNTRYmen
 
 > UIRP Hackathon 2024
 
