@@ -1,6 +1,20 @@
 services:
-  server:
+  frontend:
     build:
-      context: .
+      context: ./frontend
+    volumes:
+      - build-data:/frontend/dist
+
+  backend:
+    build:
+      context: ./backend
     ports:
-      - 8000:8000
+      - '8000:8000'
+    volumes:
+      - ./backend:/app
+      - build-data:/app/dist
+    depends_on:
+      - frontend
+
+volumes:
+  build-data:
