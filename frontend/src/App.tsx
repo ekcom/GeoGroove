@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { motion } from "framer-motion";
+import TextAnim from './TextAnim';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +26,10 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+        <motion.div>
+          Typewriter effect
+        </motion.div>
+        <TextAnim/>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
