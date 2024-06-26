@@ -14,4 +14,5 @@ COPY . /app
 EXPOSE 8000
 
 # Start the app
-CMD ["python", "app.py"]
+RUN ls
+CMD ["fastapi", "run", "app.py"]
