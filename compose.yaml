@@ -1,11 +1,9 @@
-version: '3'
-
 services:
   frontend:
     build:
       context: ./frontend
     volumes:
-      - ./frontend:/app
+      - build-data:/frontend/dist
 
   backend:
     build:
@@ -14,5 +12,9 @@ services:
       - '8000:8000'
     volumes:
       - ./backend:/app
+      - build-data:/app/dist
     depends_on:
       - frontend
+
+volumes:
+  build-data:

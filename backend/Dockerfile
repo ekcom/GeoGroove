@@ -9,7 +9,6 @@ RUN pip install -r requirements.txt
 
 # Copy app files
 COPY . /app
-COPY ../frontend/build /app/build
 
 # Expose the port the app runs on
 EXPOSE 8000

@@ -1,14 +1,14 @@
 # Base image
 FROM node:21
 
-WORKDIR /app
+WORKDIR /frontend
 
 # Install dependencies
-COPY package.json /app/package.json
+COPY package.json /frontend/package.json
 RUN npm install
 
 # Copy app files
-COPY . /app
+COPY . /frontend
 
 # Start the app
-CMD ["npm", "build"]
+RUN npm run build
