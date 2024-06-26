@@ -7,4 +7,4 @@ app = FastAPI()
 async def test():
     return {"message": "test"}
 
-app.mount("/", StaticFiles(directory="dist"), name="dist")
+app.mount("/", StaticFiles(directory="dist", html = True), name="dist")
