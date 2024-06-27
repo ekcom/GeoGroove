@@ -15,9 +15,7 @@ async def get_user_id(*, token: str):
 # and adds the listed tracks
 async def create_playlist_with_tracks(name: str, tracks: list[str], *, user_id: str, token: str):
     playlist_id = await create_playlist(name, user_id=user_id, token=token)
-    print(playlist_id)
-    # TODO
-    return True
+    return await add_tracks_to_playlist(playlist_id, tracks, user_id=user_id, token=token)
 
 # Creates a playlist
 # and returns its id
@@ -33,3 +31,14 @@ async def create_playlist(name: str, *, user_id: str, token: str):
     print(f"create_playlist:\tSP API requet status {res.status_code}")
     json_data = res.json()
     return json_data["id"]
+
+# Adds tracks to an existing playlist
+async def add_tracks_to_playlist(playlist_id: str, tracks: list[str], *, user_id: str, token: str):
+    res = requests.post(f"{SPOTIFY_API_URL}/playlists/{playlist_id}/tracks",
+                        headers={ "Authorization": f"Bearer {token}" , "Content-Type": "application/json"},
+                        data=json.dumps({ "uris": tracks, "position": 0 }))
+    print(f"add_tracks_to_playlist:\tSP API requet status {res.status_code}")
+    json_data = res.json()
+    # todo return something meaningful
+    #return json_data["?""]
+    return True
