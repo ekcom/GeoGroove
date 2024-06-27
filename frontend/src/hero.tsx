@@ -63,7 +63,11 @@ export default function Hero() {
         body: JSON.stringify(transformArray(locations))
       });
       const result = await response.json();
-      console.log('Form submitted successfully:', result);
+      if (result.status === "ok") {
+        window.location.href = "/auth/spotify";
+      } else {
+        throw new Error("didn't work");
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
     }

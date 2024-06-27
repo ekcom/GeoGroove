@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request
 from starlette.responses import RedirectResponse, FileResponse, JSONResponse
 import os
+import json
 
 from utils.get_playlist_name import gen_playlist_name
 from utils.spotify.user_queries import get_user_id, create_playlist_with_tracks, get_tracks_for_artists
@@ -26,13 +27,16 @@ def client_landed_page():
 
 @router.post("/make-playlist/spotify")
 async def make_playlist_sp(request: Request):
-    json = await request.json() # { token, state }
-    user_id = await get_user_id(token=json["token"])
-    spotify_track_list = [] # todo get list of tracks to import
-    # TODO move elsewhere
-    spotify_track_list = await get_tracks_for_artists(["Dua Lipa"], token=json["token"])
-    # /TODO move elsewhere
-    ok = await create_playlist_with_tracks(gen_playlist_name(), spotify_track_list, user_id=user_id, token=json["token"])
+    json_req = await request.json() # { token, state }
+    user_id = await get_user_id(token=json_req["token"])
+    artists_raw = request.cookies.get("artists")
+    print(f"artists_raw: {artists_raw}") # TODO
+    if artists_raw == None:
+        return JSONResponse({ "status": "error" })
+    artists = json.loads(artists_raw)
+    print(f"/make-playlist-spotify\tGetting tracks for {artists}")
+    spotify_track_list = await get_tracks_for_artists(artists, token=json_req["token"])
+    ok = await create_playlist_with_tracks(gen_playlist_name(), spotify_track_list, user_id=user_id, token=json_req["token"])
 
     if ok:
         return JSONResponse({ "status": "ok" })

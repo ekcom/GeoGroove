@@ -4,6 +4,9 @@ import base64
 import random
 import os
 
+# todo this shouldn't be necessary
+from dotenv import load_dotenv
+load_dotenv()
 
 all_df = pd.read_csv('./data/artist_cities_all.csv')
 
