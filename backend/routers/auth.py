@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from starlette.responses import RedirectResponse
+from starlette.responses import RedirectResponse, FileResponse
 import spotipy
 import os
 
@@ -20,11 +20,5 @@ async def auth_sp():
 # Callback after Spotify auth
 # hit on success or failure
 @router.get("/callback")
-def todo(request: Request):
-    user_id = "TODO get from params or something"
-    spotify_track_list = [] # todo get list of tracks to import
-    #playlist = sp.user_playlist_create(user_id, gen_playlist_name(), public=False, description="playlist description")
-    #sp.user_playlist_add_tracks(user_id, playlist["id"], spotify_track_list)
-
-    # TODO return a success page
-    return "done"
+def client_landed_page():
+    return FileResponse("./dist/post-auth-sp.html")
