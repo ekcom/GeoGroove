@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CursorBlinker from "./CursorBlinker";
 
 
@@ -22,7 +22,7 @@ export default function TextAnim() {
 
   return (
     <div className="text-2xl font-bold text-left">
-      <motion.h1 className="inline ">{displayText}</motion.h1>
+      <motion.h1 className="inline">{displayText}</motion.h1>
       <CursorBlinker />
     </div>
   );

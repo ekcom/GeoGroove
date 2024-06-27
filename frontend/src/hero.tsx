@@ -1,11 +1,12 @@
 import TextAnim from "./TextAnim";
-// import Input from "./components/Input";
 import City from "./components/City";
 import image from './assets/artist.png';
 import { useState } from "react";
-
+import { motion } from "framer-motion"
 
 export default function Hero() {
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [locations, setLocations] = useState([{
     id: 0,
@@ -54,6 +55,7 @@ export default function Hero() {
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
     try {
       const response = await fetch('/submit-form', {
         method: 'POST',
@@ -62,8 +64,15 @@ export default function Hero() {
         },
         body: JSON.stringify(transformArray(locations))
       });
+
       const result = await response.json();
-      console.log('Form submitted successfully:', result);
+
+      if (result.status === "ok") {
+        document.cookie = `artists=${result.artists}`;
+        window.location.href = "/auth/spotify";
+      } else {
+        throw new Error("didn't work");
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -77,8 +86,6 @@ export default function Hero() {
           Explore Your Local Sound: Discover emerging artists and hidden musical gems in your area with our platform. Uncover a diverse range of genres and support talented musicians right in your neighborhood. Whether you're into indie rock, hip-hop, folk, or electronic beats, find your next favorite song from local artists on our curated platform.
         </div>
       </div>
-      {/* <Input /> */}
-
 
       <div className='relative w-full'>
       <form onSubmit={submit} >
@@ -109,6 +116,7 @@ export default function Hero() {
                   </svg>
                 </button>
               )}
+              
             </div>
             
           </div>
@@ -116,7 +124,15 @@ export default function Hero() {
         <div className='text-gray-300 text-left mt-4'>
           E.g. Champaign <br/> Add multiple locations by clicking on the plus button. Locations can be added from below as well.
         </div>
+        
         <button type="submit" className='px-5 bg-accent rounded-3xl text-2xl font-bold absolute right-0 mt-8'>Next</button>
+        {isLoading && (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="absolute right-5 w-8 h-8 border-4 border-white border-t-transparent border-solid rounded-full"
+          ></motion.div>)
+        }
       </form>
     </div>
 
