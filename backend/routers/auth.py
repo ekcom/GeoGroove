@@ -1,6 +1,9 @@
 from fastapi import APIRouter
+from starlette.responses import RedirectResponse
+import spotipy
+import os
 
-from spotipy.oauth2 import SpotifyClientCredentials,SpotifyOAuth
+from utils.get_playlist_name import gen_playlist_name
 
 
 router = APIRouter(
@@ -9,16 +12,19 @@ router = APIRouter(
 
 @router.get("/auth/spotify")
 async def auth_sp():
-    user_id = "TODO get from params or something"
-    spotify_track_list = [] # todo get list of tracks to import
+    STATE = "TODO" # match with cookies or something
 
-    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(os.environ["CLIENT_ID"], os.environ["CLIENT_SECRET"], redirect_uri="http://localhost:8000/callback", scope="playlist-modify-private"))
-    playlist = sp.user_playlist_create(user_id, "playlist name", public=False, description="playlist description")
-    sp.user_playlist_add_tracks(user_id, playlist["id"], spotify_track_list)
-
-    # TODO return a redirect or something
+    #sp = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyOAuth(os.environ["CLIENT_ID"], os.environ["CLIENT_SECRET"], redirect_uri="http://localhost:8000/callback", scope="playlist-modify-private"))
+    return RedirectResponse(url=f"https://accounts.spotify.com/authorize?client_id={os.environ['CLIENT_ID']}&response_type=token&redirect_uri={os.environ['ORIGIN_URL']}/callback&state={STATE}&scope=playlist-modify-private user-top-read")
 
 # Callback after Spotify auth
 # hit on success or failure
 @router.get("/callback")
-    # todo
+def todo(request: Request):
+    user_id = "TODO get from params or something"
+    spotify_track_list = [] # todo get list of tracks to import
+    #playlist = sp.user_playlist_create(user_id, gen_playlist_name(), public=False, description="playlist description")
+    #sp.user_playlist_add_tracks(user_id, playlist["id"], spotify_track_list)
+
+    # TODO return a success page
+    return "done"
