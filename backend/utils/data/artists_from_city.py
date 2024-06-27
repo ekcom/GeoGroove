@@ -3,7 +3,7 @@ import requests
 import base64
 import random
 
-all_df = pd.read_csv('../data/artist_cities_all.csv')
+all_df = pd.read_csv('./data/artist_cities_all.csv')
 
 
 client_id = '49db8d61aa5d4982a6ec403ae0bc25d5'
