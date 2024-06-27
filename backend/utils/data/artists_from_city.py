@@ -67,11 +67,11 @@ def get_artists(cities, playlist_len):
     return tot_artists
 
 artist_list = get_artists(["Nashville", "San Francisco", "Phoenix"], 12)
-print(artist_list)
+#print(artist_list)
 
 def get_track_ids(artist_list, playlist_len):
     num_each = int(playlist_len/len(artist_list))
-    print("# tracks per artist: ", num_each)
+    #print("# tracks per artist: ", num_each)
     track_ids = []
     for artist in artist_list:
         artist_id = None
@@ -102,7 +102,7 @@ def get_track_ids(artist_list, playlist_len):
         if top_tracks_response.status_code == 200:
             top_tracks_data = top_tracks_response.json()
             for i in range(num_each):
-                print(top_tracks_data['tracks'][i]['name'])
+                #print(top_tracks_data['tracks'][i]['name'])
                 track_ids.append(top_tracks_data['tracks'][i]['id'])
 
     return track_ids
