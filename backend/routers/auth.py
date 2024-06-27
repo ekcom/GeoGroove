@@ -31,11 +31,10 @@ async def make_playlist_sp(request: Request):
     json = await request.json() # { token, state }
     user_id = await get_user_id(token=json["token"])
     spotify_track_list = [] # todo get list of tracks to import
-    ok = await create_playlist_with_tracks(gen_playlist_name(), spotify_track_list, user_id=user_id, token=json["token"])
-
     # TODO move elsewhere
-    await get_tracks_for_artists(["Dua Lipa"], token=json["token"])
+    spotify_track_list = await get_tracks_for_artists(["Dua Lipa"], token=json["token"])
     # /TODO move elsewhere
+    ok = await create_playlist_with_tracks(gen_playlist_name(), spotify_track_list, user_id=user_id, token=json["token"])
 
     if ok:
         return JSONResponse({ "status": "ok" })

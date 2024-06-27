@@ -1,5 +1,6 @@
 import requests
 import json
+from fastapi import status
 
 
 SPOTIFY_API_URL = "https://api.spotify.com/v1"
@@ -34,14 +35,13 @@ async def create_playlist(name: str, *, user_id: str, token: str):
 
 # Adds tracks to an existing playlist
 async def add_tracks_to_playlist(playlist_id: str, tracks: list[str], *, user_id: str, token: str):
+    print(json.dumps({ "uris": tracks, "position": 0 }))
     res = requests.post(f"{SPOTIFY_API_URL}/playlists/{playlist_id}/tracks",
                         headers={ "Authorization": f"Bearer {token}" , "Content-Type": "application/json"},
                         data=json.dumps({ "uris": tracks, "position": 0 }))
     print(f"add_tracks_to_playlist:\tSP API requet status {res.status_code}")
     json_data = res.json()
-    # todo return something meaningful
-    #return json_data["?""]
-    return True
+    return res.status_code == status.HTTP_201_CREATED
 
 async def get_tracks_for_artists(artist_names: list[str], *, token):
     tracks = []
@@ -62,4 +62,4 @@ async def get_top_track(artist_id: str, *, token: str):
     res = requests.get(f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks", headers={ "Authorization": f"Bearer {token}" })
     print(f"get_top_track:\tSP API requet status {res.status_code}")
     json = res.json()
-    return [track["id"] for track in json["tracks"]] if json["tracks"] else None
+    return [f"spotify:track:{track['id']}" for track in json["tracks"]] if json["tracks"] else None
