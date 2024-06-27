@@ -26,7 +26,9 @@ def client_landed_page():
     return FileResponse("./dist/post-auth-sp.html")
 
 @router.post("/make-playlist/spotify")
-def make_playlist_sp(request: Request):
+async def make_playlist_sp(request: Request):
+    json = await request.json()
+    print(json)
     user_id = "TODO get from params or something"
     spotify_track_list = [] # todo get list of tracks to import
     #playlist = sp.user_playlist_create(user_id, gen_playlist_name(), public=False, description="playlist description")
