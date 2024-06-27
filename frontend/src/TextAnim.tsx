@@ -4,7 +4,7 @@ import CursorBlinker from "./CursorBlinker";
 
 
 export default function TextAnim() {
-  const baseText = "Dear Hiring Manager, " as string;
+  const baseText = "Find local artists with GeoGroove." as string;
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
   const displayText = useTransform(rounded, (latest) =>
@@ -14,16 +14,16 @@ export default function TextAnim() {
   useEffect(() => {
     const controls = animate(count, baseText.length, {
       type: "tween",
-      duration: 1,
+      duration: 3,
       ease: "easeInOut",
     });
     return controls.stop;
   }, []);
 
   return (
-    <span className="">
-      <motion.span>{displayText}</motion.span>
+    <div className="text-2xl font-bold text-left">
+      <motion.h1 className="inline ">{displayText}</motion.h1>
       <CursorBlinker />
-    </span>
+    </div>
   );
 }
