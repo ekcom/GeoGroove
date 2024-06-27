@@ -4,7 +4,7 @@ import spotipy
 import os
 
 from utils.get_playlist_name import gen_playlist_name
-from utils.spotify.user_queries import get_user_id, create_playlist_with_tracks
+from utils.spotify.user_queries import get_user_id, create_playlist_with_tracks, get_tracks_for_artists
 
 
 router = APIRouter(
@@ -32,6 +32,10 @@ async def make_playlist_sp(request: Request):
     user_id = await get_user_id(token=json["token"])
     spotify_track_list = [] # todo get list of tracks to import
     ok = await create_playlist_with_tracks(gen_playlist_name(), spotify_track_list, user_id=user_id, token=json["token"])
+
+    # TODO move elsewhere
+    await get_tracks_for_artists(["Dua Lipa"], token=json["token"])
+    # /TODO move elsewhere
 
     if ok:
         return JSONResponse({ "status": "ok" })
