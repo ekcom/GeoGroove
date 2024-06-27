@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 
 from routers import auth
+from routers import forms
 from routers import test
 
 
@@ -16,6 +17,7 @@ app = FastAPI(docs_url=None)
 
 # Routes
 app.include_router(auth.router)
+app.include_router(forms.router)
 app.include_router(test.router)
 
 app.mount("/", StaticFiles(directory="dist", html = True), name="dist")
