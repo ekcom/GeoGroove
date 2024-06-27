@@ -59,4 +59,3 @@ def get_artists(city, num_artists):
     sorted_artists = list(sorted_artists)[:min(len(sorted_artists), num_artists)]
     return sorted_artists
 
-print(get_artists("New York", 10))
