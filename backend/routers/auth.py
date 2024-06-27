@@ -11,7 +11,7 @@ router = APIRouter(
 )
 
 @router.get("/auth/spotify")
-async def auth_sp():
+def auth_sp():
     STATE = "TODO" # match with cookies or something
 
     #sp = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyOAuth(os.environ["CLIENT_ID"], os.environ["CLIENT_SECRET"], redirect_uri="http://localhost:8000/callback", scope="playlist-modify-private"))

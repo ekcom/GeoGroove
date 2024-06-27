@@ -7,5 +7,5 @@ router = APIRouter(
 )
 
 @router.get("/test")
-async def test():
+def test():
     return {"message": "test"}
