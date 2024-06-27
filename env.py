@@ -1,0 +1,6 @@
+playlist = 'test_hackathon_2024'
+user_id = 'sw5nw58cvqho8slfppgh91xbt'
+user_name = 'Abhishekr'
+scope = 'playlist-modify-private'
+client_id = '49db8d61aa5d4982a6ec403ae0bc25d5'
+client_secret = 'a629019030874cd4b2e1ed7f46a3f261'
