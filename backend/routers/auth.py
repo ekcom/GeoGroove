@@ -33,7 +33,8 @@ async def make_playlist_sp(request: Request):
     print(f"artists_raw: {artists_raw}") # TODO
     if artists_raw == None:
         return JSONResponse({ "status": "error" })
-    artists = json.loads(artists_raw)
+    #artists = json.loads(artists_raw)
+    artists = artists_raw.split(",")
     print(f"/make-playlist-spotify\tGetting tracks for {artists}")
     spotify_track_list = await get_tracks_for_artists(artists, token=json_req["token"])
     ok = await create_playlist_with_tracks(gen_playlist_name(), spotify_track_list, user_id=user_id, token=json_req["token"])
