@@ -4,6 +4,7 @@ import spotipy
 import os
 
 from utils.get_playlist_name import gen_playlist_name
+from utils.spotify.user_queries import get_user_id
 
 
 router = APIRouter(
@@ -27,9 +28,9 @@ def client_landed_page():
 
 @router.post("/make-playlist/spotify")
 async def make_playlist_sp(request: Request):
-    json = await request.json()
-    print(json)
-    user_id = "TODO get from params or something"
+    json = await request.json() # { token, state }
+    user_id = await get_user_id(token=json["token"])
+    print(f"ID {user_id}")
     spotify_track_list = [] # todo get list of tracks to import
     #playlist = sp.user_playlist_create(user_id, gen_playlist_name(), public=False, description="playlist description")
     #sp.user_playlist_add_tracks(user_id, playlist["id"], spotify_track_list)
