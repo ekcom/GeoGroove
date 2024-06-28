@@ -76,7 +76,8 @@ Before you begin, ensure you have Docker installed on your system. You can downl
 
 Ensure you have a `.env` file in your backend directory with the following content:
 
+```
 CLIENT_ID=your_spotify_client_id
 CLIENT_SECRET=your_spotify_client_secret
 REDIRECT_URI=http://localhost:8000/callback
-
+```
