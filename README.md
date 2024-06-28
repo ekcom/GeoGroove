@@ -4,6 +4,8 @@ GeoGroove revolutionizes music discovery by allowing Spotify users to find new m
 
 **Received Skillful Execution award for [UIRP hackathon](https://github.com/uirphack/2024/blob/master/README.md)**
 
+![A demo of GeoGroove, featuring city selection, Spotify authentication, and seamless playlist creation.](./demo.gif)
+
 ## Problem Statement
 
 As an avid music listener embarking on a road trip to Champaign, Illinois, you yearn to connect with artists who truly embody the spirit of this city. Music reflects the culture you’re surrounded by, and you want to find artists who authentically represent what it’s like to be from Champaign. However, existing platforms lack a feature that makes this possible. This is why we created GeoGroove.
